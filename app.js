@@ -1,4 +1,8 @@
 let inquirer = require("inquirer");
+let Employee = require("./Employee");
+let Manager = require('./Manager');
+let Engineer = require('./Engineer');
+let Intern = require('./Intern');
 
 let teamArray = [];
 
@@ -35,7 +39,11 @@ function getInfo(call_back) {
     inquirer.prompt(questions)
         .then(function(response) {
 
-            teamArray.push(response);
+            let employee;
+            //Create instances of classes
+            if (response.role === "Employee") {
+                employee =
+            }
             call_back()
 
         })
