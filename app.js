@@ -1,8 +1,11 @@
 let inquirer = require("inquirer");
+
+let teamArray = [];
+
 let questions = [{
         name: 'role',
-        message: 'Enter user rule',
-        type: 'List',
+        message: 'Enter user role',
+        type: 'list',
         choices: ['Manager', 'Engineer', 'Employee', 'Intern']
     },
     {
@@ -29,21 +32,10 @@ let questions = [{
 ]
 
 function getInfo(call_back) {
-    inquirer.prompt([{
-                type: `input`,
-                name: `team-lead`,
-                message: `Enter the team lead's name:`
-
-            },
-            {
-                type: 'number',
-                name: 'team-size',
-                message: 'How many members are on this team?'
-            }
-
-        ])
+    inquirer.prompt(questions)
         .then(function(response) {
-            console.log(response);
+
+            teamArray.push(response);
             call_back()
 
         })
@@ -51,7 +43,8 @@ function getInfo(call_back) {
 };
 
 function testf() {
-    console.log('Roll the damn camera!!');
+    // console.log('Roll the damn camera!!');
+    console.log(teamArray);
 }
 
 getInfo(testf);
