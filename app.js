@@ -3,6 +3,7 @@ let Employee = require("./lib/Employee");
 let Manager = require('./lib/Manager');
 let Engineer = require('./lib/Engineer');
 let Intern = require('./lib/Intern');
+let fs = require("fs");
 
 let teamArray = [];
 
@@ -67,8 +68,7 @@ function add_employee() {
         if (response.new_employee === true) {
             getInfo(add_employee);
         } else {
-            console.log('Writing HTML now.');
-            console.log(teamArray);
+            writeHTML();
         }
     });
 }
@@ -97,10 +97,24 @@ function getInfo(call_back) {
 
 };
 
-function testf() {
-    // console.log('Roll the damn camera!!');
-    console.log(teamArray);
-}
+function writeHTML() {
+    // let templateHtml = await fs.readFileSync("./output/team.html", "utf8", (err) => {
+    //     if (err) {
+    //         console.log(`My code doesn't work, I don't know why :(`);
+    //     }
+    console.log(JSON.stringify(teamArray));
+    fs.writeFile('./output/team.html', JSON.stringify(teamArray), (err) => {
+        if (err) {
+            console.log(`My code doesn't work, I don't know why :(`);
+        }
+    });
+};
+
+
+// function testf() {
+//     // console.log('Roll the damn camera!!');
+//     console.log(teamArray);
+// }
 
 // getInfo(testf);
 
