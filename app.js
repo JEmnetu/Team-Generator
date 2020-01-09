@@ -25,17 +25,17 @@ let questions = [{
         name: "email",
         message: "Enter email:",
         type: "input",
-        validate: function(email) {
+        // validate: function(email) {
 
-            valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+        //     valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 
-            if (valid) {
-                return true;
-            } else {
-                console.log("Please enter a valid email address.");
-                return false;
-            }
-        }
+        //     if (valid) {
+        //         return true;
+        //     } else {
+        //         console.log("Please enter a valid email address.");
+        //         return false;
+        //     }
+        // }
     },
     {
         name: 'github',
@@ -62,6 +62,8 @@ let add_employee_question = [{
     }
 
 ];
+
+
 
 function add_employee() {
     inquirer.prompt(add_employee_question).then(function(response) {
@@ -102,12 +104,50 @@ function writeHTML() {
     //     if (err) {
     //         console.log(`My code doesn't work, I don't know why :(`);
     //     }
-    console.log(JSON.stringify(teamArray));
-    fs.writeFile('./output/team.html', JSON.stringify(teamArray), (err) => {
+    // console.log(JSON.stringify(teamArray));
+    let employeeHtml = "";
+    teamArray.forEach(member => {
+        employeeHtml = employeeHtml + member.html();
+        console.log(employeeHtml);
+
+    });
+
+    let templatePage =
+        `<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../assets/styles/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Dev Team 9000</a>
+    </nav>
+
+    <div class="container-fluid main-container">
+ ${employeeHtml}
+    </div>
+
+</body>
+
+</html>`;
+
+    fs.writeFile('./output/team.html', templatePage, (err) => {
         if (err) {
             console.log(`My code doesn't work, I don't know why :(`);
         }
     });
+    // fs.writeFile('test.txt', JSON.stringify(teamArray), (err) => {
+    //     if (err) {
+    //         console.log(`My code doesn't work, I don't know why :(`);
+    //     }
+    // });
 };
 
 
