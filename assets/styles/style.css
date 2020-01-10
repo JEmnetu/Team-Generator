@@ -1,3 +1,17 @@
-.main-container {
+body {
     background-color: red;
+}
+
+.card {
+    height: 15em;
+    border: solid 4px black;
+}
+
+#card-row {
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+.navbar {
+    border-bottom: solid 4px black;
 }
